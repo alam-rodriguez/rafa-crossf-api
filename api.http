@@ -1,0 +1,96 @@
+//-----------------------settings--------------------------------
+GET http://localhost:8080/api/settings/get-settings
+
+###
+PUT http://localhost:8080/api/settings/edit-settings
+Content-Type: application/json
+
+{
+  "precioInscripcion": 500,
+  "precioMensualidad": 1000,
+  "nameApp": "china-gym 8"
+}
+
+//------------------------users----------------------------------------
+### 
+GET http://localhost:8080/api/users/get-users-actives
+
+###
+GET http://localhost:8080/api/users/get-users
+
+###
+GET http://localhost:8080/api/users/get-users/9876543456
+
+###
+POST http://localhost:8080/api/users/create-user
+Content-Type: application/json
+
+{
+  "id": "567898765",
+  "name": "Luis Rodriguez",
+  "number": "8293198834",
+  "address": "San antonio de guerra",
+  "email": "alamrd2016@gmail.com",
+  "genre": "masculino",
+  "state": "activo",
+  "userCreatedDate":12345678,
+  "registrationPricePaid": 1555,
+  "paymentUpTo": 345678765
+}
+
+###
+PATCH http://localhost:8080/api/users/set-user-status/wert34567
+Content-Type: application/json
+
+{
+  "state": "inactive"
+}
+
+
+###
+
+PATCH http://localhost:8080/api/users/change-user-payment-up-to/fe949b49-1cd0-4398-baf0-f52dc025a540
+Content-Type: application/json
+
+{
+  "paymentUpTo": 2222222222
+}
+
+###
+
+PUT http://localhost:8080/api/users/update-user/e333515e-a2a0-4ad7-8847-0ead768cfcd7
+Content-Type: application/json
+
+{
+  "name": "Alam Rodriguez",
+  "number": "1234567890",
+  "address": "nada",
+  "email": "",
+  "genre": "no se sabe",
+  "state": "no se sabe"
+}
+
+//---------------------------payments-----------------------------------
+###
+POST http://localhost:8080/api/payments/add-payment
+Content-Type: application/json
+
+{
+  "id": "12345767",
+  "user_id": "3456ffgfsdfge88u",
+  "paymentAmount": 500,
+  "paymentDate": 1234567654,
+  "paymentMethod": "efectivo"
+}
+
+###
+GET http://localhost:8080/api/payments/get-payments
+
+### 
+GET http://localhost:8080/api/payments/get-payments/3456ffgfsdfge88u
+
+###
+DELETE  http://localhost:8080/api/payments/delete-payment/bc176a70-482f-4360-b921-e95bdf792b3f
+
+###
+POST http://localhost:8080/set-tables
