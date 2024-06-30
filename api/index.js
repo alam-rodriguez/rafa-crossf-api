@@ -34,36 +34,36 @@ export const client = createClient({
 app.post("/set-tables", async (req, res) => {
  
   try {
-    await client.execute(`
-      CREATE TABLE users(
-        id INT PRIMARY KEY NOT NULL,
-        name VARCHAR(255) NOT NULL,
-        number VARCHAR(50) NOT NULL,
-        address TEXT NOT NULL,
-        email TEXT NOT NULL,
-        genre TEXT NOT  NULL,
-        state TEXT NOT NULL,
-        userCreatedDate INT NOT NULL,
-        registrationPricePaid INT NOT NULL,
-        paymentUpTo INT NOT NULL
-      );
-    `);
-    client.execute(`CREATE TABLE settings(
-        registrationPrice INT NOT NULL,
-        monthlyPrice INT NOT NULL,
-        nameApp TEXT NOT NULL
-      );
-    `);
-    await client.execute(`INSERT INTO settings(registrationPrice, monthlyPrice, nameApp) VALUES (1500, 1000, 'rafa-crossf-gym')`);
-    await client.execute(
-      `CREATE TABLE payments(
-        id INT PRIMARY KEY NOT NULL,
-        user_id INT NOT NULL,
-        paymentAmount int not null,
-        paymentDate int not null,
-        paymentMethod text not null
-      );`
-    );
+    // await client.execute(`
+    //   CREATE TABLE users(
+    //     id INT PRIMARY KEY NOT NULL,
+    //     name VARCHAR(255) NOT NULL,
+    //     number VARCHAR(50) NOT NULL,
+    //     address TEXT NOT NULL,
+    //     email TEXT NOT NULL,
+    //     genre TEXT NOT  NULL,
+    //     state TEXT NOT NULL,
+    //     userCreatedDate INT NOT NULL,
+    //     registrationPricePaid INT NOT NULL,
+    //     paymentUpTo INT NOT NULL
+    //   );
+    // `);
+    // client.execute(`CREATE TABLE settings(
+    //     registrationPrice INT NOT NULL,
+    //     monthlyPrice INT NOT NULL,
+    //     nameApp TEXT NOT NULL
+    //   );
+    // `);
+    // await client.execute(`INSERT INTO settings(registrationPrice, monthlyPrice, nameApp) VALUES (1500, 1000, 'rafa-crossf-gym')`);
+    // await client.execute(
+    //   `CREATE TABLE payments(
+    //     id INT PRIMARY KEY NOT NULL,
+    //     user_id INT NOT NULL,
+    //     paymentAmount int not null,
+    //     paymentDate int not null,
+    //     paymentMethod text not null
+    //   );`
+    // );
 
     // await client.execute("DROP TABLE payments;");
     // await client.execute("DROP TABLE settings;");
@@ -170,3 +170,5 @@ const PORT = process.env.PORT ?? 8080;
 app.listen(PORT, () => {
   console.log(`server runing on port http://localhost:${PORT}`);
 });
+
+export default app;
