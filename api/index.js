@@ -1,6 +1,8 @@
 import express, { json } from "express";
 const app = express();
 
+import 'dotenv/config'
+
 import { createClient } from "@libsql/client";
 
 app.use((req, res, next) => {
@@ -24,43 +26,44 @@ app.use("/api/settings", routerSettings);
 app.use("/api/payments", routerPayments);
 
 export const client = createClient({
-  url: "libsql://china-gym-alam-rodriguez.turso.io",
+  url: process.env.DATA_BASE_URL,
   authToken:
-    "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3MTIyNjE4NzYsImlkIjoiNzFlYjc2Y2MtM2RjZS00NmUwLWI4ZTQtZDUyMTcyZDcyM2RlIn0.r_I0M6RM-oHQmuuTLMZtY46MS-Xn4dnCn2qG6UnneBvyw4gOOL5HpFmZUUe_9hH4QoW3Lnb_QCGWJyGUPGrdAw",
+    process.env.DATA_BASE_AUTH_TOKEN,
 });
 
 app.post("/set-tables", async (req, res) => {
+ 
   try {
-    // await client.execute(`
-    //   CREATE TABLE users(
-    //     id INT PRIMARY KEY NOT NULL,
-    //     name VARCHAR(255) NOT NULL,
-    //     number VARCHAR(50) NOT NULL,
-    //     address TEXT NOT NULL,
-    //     email TEXT NOT NULL,
-    //     genre TEXT NOT  NULL,
-    //     state TEXT NOT NULL,
-    //     userCreatedDate INT NOT NULL,
-    //     registrationPricePaid INT NOT NULL,
-    //     paymentUpTo INT NOT NULL
-    //   );
-    // `);
-    // client.execute(`CREATE TABLE settings(
-    //     registrationPrice INT NOT NULL,
-    //     monthlyPrice INT NOT NULL,
-    //     nameApp TEXT NOT NULL
-    //   );
-    // `);
-    // await client.execute(`INSERT INTO settings(registrationPrice, monthlyPrice, nameApp) VALUES (1500, 1000, 'china-gym')`);
-    // await client.execute(
-    //   `CREATE TABLE payments(
-    //     id INT PRIMARY KEY NOT NULL,
-    //     user_id INT NOT NULL,
-    //     paymentAmount int not null,
-    //     paymentDate int not null,
-    //     paymentMethod text not null
-    //   );`
-    // );
+    await client.execute(`
+      CREATE TABLE users(
+        id INT PRIMARY KEY NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        number VARCHAR(50) NOT NULL,
+        address TEXT NOT NULL,
+        email TEXT NOT NULL,
+        genre TEXT NOT  NULL,
+        state TEXT NOT NULL,
+        userCreatedDate INT NOT NULL,
+        registrationPricePaid INT NOT NULL,
+        paymentUpTo INT NOT NULL
+      );
+    `);
+    client.execute(`CREATE TABLE settings(
+        registrationPrice INT NOT NULL,
+        monthlyPrice INT NOT NULL,
+        nameApp TEXT NOT NULL
+      );
+    `);
+    await client.execute(`INSERT INTO settings(registrationPrice, monthlyPrice, nameApp) VALUES (1500, 1000, 'rafa-crossf-gym')`);
+    await client.execute(
+      `CREATE TABLE payments(
+        id INT PRIMARY KEY NOT NULL,
+        user_id INT NOT NULL,
+        paymentAmount int not null,
+        paymentDate int not null,
+        paymentMethod text not null
+      );`
+    );
 
     // await client.execute("DROP TABLE payments;");
     // await client.execute("DROP TABLE settings;");
@@ -75,7 +78,8 @@ app.post("/set-tables", async (req, res) => {
 
 app.get("/", async (req, res) => {
   console.log("first");
-  res.send("bien, como estan.");
+   console.log(process.env.DATA_BASE_URL)
+  res.send("bien, como estan...");
 });
 
 // app.post("/api/create-user", async (req, res) => {
